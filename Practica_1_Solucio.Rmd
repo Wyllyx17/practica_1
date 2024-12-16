@@ -24,3 +24,22 @@ knitr::opts_chunk$set(echo = TRUE)
 4.  **Agrupación de usuarios por historial**
     -   **Clasificación:** Inferencial
     -   **Razón:** Implica generalizar conclusiones sobre la agrupación de usuarios.
+
+# Parte 2: Análisis de Conexiones TCP
+
+1.  **Obtención de datos**
+    -   Extraer logs de conexiones TCP que incluyan origen, destino, puertos, timestamps y protocolos.
+2.  **Tratamiento de datos**
+    -   Limpieza: Identificar y eliminar datos duplicados.
+    -   Filtrado: Seleccionar conexiones web (puertos 80 o 443).
+3.  **Preguntas clave**
+    -   ¿Qué máquinas han realizado más conexiones externas?
+    -   ¿Qué direcciones IP destino son más frecuentes?
+4.  **Análisis visual**
+    -   Gráficos de frecuencia de IPs.
+    -   Diagramas de dispersión para analizar patrones temporales.
+5.  **Comunicación de resultados**
+    -   Elaborar gráficos claros y tablas.
+    -   Recomendar estrategias como restricciones de puertos.
+
+# Parte 3: Introducción a R
