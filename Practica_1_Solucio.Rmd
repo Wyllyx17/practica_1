@@ -8,22 +8,19 @@ date: "2024-12-16"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+# Parte 1: Clasificación de Preguntas
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## Pregunta 1: Clasificación y Razón
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+1.  **Cuántos vehículos tenemos por tipo**
+    -   **Clasificación:** Descriptiva
+    -   **Razón:** Este análisis resume el conjunto de datos mostrando características básicas como frecuencias o conteos.
+2.  **Preferencias en cuanto a género literario según rango de edad**
+    -   **Clasificación:** Exploratoria
+    -   **Razón:** Busca identificar patrones o relaciones entre variables (género literario y rango de edad).
+3.  **Determinación de problemas futuros con mensajes de una red**
+    -   **Clasificación:** Predictiva
+    -   **Razón:** El objetivo es prever eventos futuros basándose en patrones históricos.
+4.  **Agrupación de usuarios por historial**
+    -   **Clasificación:** Inferencial
+    -   **Razón:** Implica generalizar conclusiones sobre la agrupación de usuarios.
