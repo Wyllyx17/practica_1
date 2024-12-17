@@ -107,6 +107,7 @@ hora_maxima <- names(peticiones_por_hora)[which.max(peticiones_por_hora)]
 print(hora_maxima)
 
 ```
+
 ## Pregunta 4: Bytes transmitidos por .edu en descargas de .txt
 
 ```{r edu-bytes}
@@ -123,6 +124,7 @@ total_bytes_edu_txt <- sum(peticiones_edu_txt$X7)
 # Mostrar el total de bytes transmitidos
 total_bytes_edu_txt
 ```
+
 ## Pregunta 5: Peticiones hacia '/'
 
 ```{r url}
@@ -134,7 +136,11 @@ nrow(peticiones_raiz)
 ```
 
 ## Pregunta 6: Peticiones con protocolo distinto de HTTP/0.2
+
 ```{r http}
+# Eliminar las comillas finales del protocolo en la columna X5
+epa_http$X5 <- sub('"$', '', epa_http$X5)
+
 # Filtrar las peticiones que no tienen como protocolo "HTTP/0.2"
 peticiones_no_http_0_2 <- subset(epa_http, X5 != "HTTP/0.2")
 
