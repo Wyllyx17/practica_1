@@ -54,8 +54,18 @@ library(readr)
 dim(epa_http)
 ```
 
-## Pregunta 2: Valor medio de la columna Bytes
+## Valor medio de la columna Bytes
 
 ```{r mean-bytes}
 mean(epa_http$X7, na.rm = TRUE)
 ```
+
+## Pregunta 2: IPs educativas (.edu)
+
+```{r edu-ips}
+edu_ips <- grepl("\\.edu$", epa_http$X1)
+sum(edu_ips)
+```
+## Pregunta 3: Hora de mayor volumen de peticiones GET
+
+## Pregunta 5: Bytes transmitidos por .edu en descargas de .txt
