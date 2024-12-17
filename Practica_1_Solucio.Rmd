@@ -8,6 +8,10 @@ date: "2024-12-16"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r load-data}
+library(readr)
+```
+
 # Parte 1: Clasificación de Preguntas
 
 ## Pregunta 1: Clasificación y Razón
@@ -43,3 +47,15 @@ knitr::opts_chunk$set(echo = TRUE)
     -   Recomendar estrategias como restricciones de puertos.
 
 # Parte 3: Introducción a R
+
+## Pregunta 1: Dimensiones del dataset
+
+```{r dimensions}
+dim(epa_http)
+```
+
+## Pregunta 2: Valor medio de la columna Bytes
+
+```{r mean-bytes}
+mean(epa_http$X7, na.rm = TRUE)
+```
