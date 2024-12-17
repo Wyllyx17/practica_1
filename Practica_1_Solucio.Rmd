@@ -66,6 +66,81 @@ mean(epa_http$X7, na.rm = TRUE)
 edu_ips <- grepl("\\.edu$", epa_http$X1)
 sum(edu_ips)
 ```
+
 ## Pregunta 3: Hora de mayor volumen de peticiones GET
 
-## Pregunta 5: Bytes transmitidos por .edu en descargas de .txt
+Para la relización de este apartado se identifica primero la primera y última hora del intervalo horario para saber la ventana de tiempo que estamos mirando. Como se podra ver, la ventana es 24 horas y por eso, en el momento de calcular la hora de maximas peticiones podemos prescindir del día.
+
+```{r get}
+# Extraer la parte de día:hora:minuto:segundo de la columna X2
+epa_http$fecha_hora <- sub("\\[(\\d{2}:\\d{2}:\\d{2}:\\d{2})\\]", "\\1", epa_http$X2)
+
+# Filtrar las peticiones para que solo incluyan las que corresponden a los días 29 y 30
+peticiones_29_30 <- subset(epa_http, grepl("^29|30", fecha_hora))
+
+# Ordenar por hora
+peticiones_ordenadas <- peticiones_29_30[order(peticiones_29_30$fecha_hora), ]
+
+# Obtener la primera y última hora del intervalo
+primera_hora <- head(peticiones_ordenadas$fecha_hora, 1)
+ultima_hora <- tail(peticiones_ordenadas$fecha_hora, 1)
+
+# Mostrar los resultados
+print(paste("Primera hora:", primera_hora))
+print(paste("Última hora:", ultima_hora))
+
+# Extraer la hora de la columna X2
+epa_http$hora_minuto_segundo <- sub(".*:(\\d{2}:\\d{2}:\\d{2})\\]", "\\1", epa_http$X2)
+
+epa_http$X3 <- gsub('^"|"$', '', epa_http$X3)
+
+# Filtrar solo las peticiones GET
+peticiones_get <- subset(epa_http, X3 == "GET")
+
+# Contar cuántas veces ocurre cada hora:minuto:segundo
+peticiones_por_hora <- table(peticiones_get$hora_minuto_segundo)
+
+# Encontrar la hora con el mayor volumen de peticiones
+hora_maxima <- names(peticiones_por_hora)[which.max(peticiones_por_hora)]
+
+# Mostrar la hora con mayor volumen de peticiones
+print(hora_maxima)
+
+```
+## Pregunta 4: Bytes transmitidos por .edu en descargas de .txt
+
+```{r edu-bytes}
+# Filtrar por dominios .edu en X1 y peticiones de archivos .txt en X4
+peticiones_edu_txt <- subset(epa_http, grepl("\\.edu", X1) & grepl("\\.txt$", X4))
+
+# Mostrar una muestra de los resultados (columnas X1 y X7)
+muestra_peticiones_edu_txt <- peticiones_edu_txt[, c("X1", "X7")]
+head(muestra_peticiones_edu_txt)
+
+# Sumar los bytes transmitidos
+total_bytes_edu_txt <- sum(peticiones_edu_txt$X7)
+
+# Mostrar el total de bytes transmitidos
+total_bytes_edu_txt
+```
+## Pregunta 5: Peticiones hacia '/'
+
+```{r url}
+# Filtrar las peticiones que buscan directamente la URL "/"
+peticiones_raiz <- subset(epa_http, X4 == "/")
+
+# Ver cuántas peticiones hay que buscan la URL "/"
+nrow(peticiones_raiz)
+```
+
+## Pregunta 6: Peticiones con protocolo distinto de HTTP/0.2
+```{r http}
+# Filtrar las peticiones que no tienen como protocolo "HTTP/0.2"
+peticiones_no_http_0_2 <- subset(epa_http, X5 != "HTTP/0.2")
+
+# Ver el número de peticiones que no tienen el protocolo "HTTP/0.2"
+numero_peticiones_no_http_0_2 <- nrow(peticiones_no_http_0_2)
+
+# Mostrar el resultado
+print(numero_peticiones_no_http_0_2)
+```
