@@ -146,9 +146,9 @@ cat("El número de peticiones que buscan directamente la URL '/' es:", num_root_
 ## Pregunta 7: Peticiones sin protocolo HTTP/0.2
 
 ```{r not-http-0-2}
-# Contar peticiones donde el protocolo no es HTTP/0.2
-not_http_02 <- epa_http %>% filter(protocol != "HTTP/0.2")
-num_not_http_02 <- nrow(not_http_02)
+# Contar peticiones donde el protocolo es HTTP/0.2
+http_02 <- epa_http %>% filter(protocol == "HTTP/0.2")
+num_not_http_02 <- nrow(epa_http) - nrow(http_02)
 cat("El número de peticiones que no tienen como protocolo 'HTTP/0.2' es:", num_not_http_02)
 ```
 
